@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-mypod
+  namespace: default
+spec:
+  type: ClusterIP
+  clusterIP: 10.97.0.1
+  selector:
+    app: mypod
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bernstein-postgres-volume
+  namespace: default
+  labels:
+    app: bernstein-postgres
+spec:
+  capacity:
+    storage: "256Mi"
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  hostPath:
+    path: "/var/lib/postgresql/data"
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bernstein-postgres-volume-claim
+  namespace: default
+  labels:
+    app: bernstein-postgres
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeName: bernstein-postgres-volume
+  resources:
+    requests:
+      storage: "256Mi"
